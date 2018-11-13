@@ -35,6 +35,7 @@ public class ReConnect extends Thread {
 			t1.setPriority(10);
 			t1.start();
 			logger.info("重连成功，开始重新接收数据...");
+			Client.chckbxNewCheckBox.setSelected(true);
 			break;
 		}
 

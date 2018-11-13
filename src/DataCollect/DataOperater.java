@@ -54,7 +54,7 @@ public class DataOperater implements Runnable {
 //				JOptionPane.showMessageDialog(Client.contentPane,
 //						"与工控机连接断开，请重新连接", "错误", JOptionPane.ERROR_MESSAGE);
 //				Client.button.setEnabled(true);
-//				Client.chckbxNewCheckBox.setSelected(false);
+				Client.chckbxNewCheckBox.setSelected(false);
 				new ReConnect(); // 开启重连线程，每10S重连一次
 				break;
 			}
