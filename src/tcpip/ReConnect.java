@@ -21,6 +21,7 @@ public class ReConnect extends Thread {
 			Socket socket = new Socket();
 			try {
 				socket.connect(new InetSocketAddress(Client.ip, 8888), 5000);
+				socket.setSoTimeout(30000);
 			} catch (IOException e) {
 				try {
 					Thread.sleep(10000);

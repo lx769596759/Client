@@ -114,6 +114,7 @@ public class Client extends JFrame implements Runnable  {
 							ip=textField_1.getText();
 							socket = new Socket(ip,8888);
 							socket.setKeepAlive(true);
+							socket.setSoTimeout(30000);
 //							Timer timer=new Timer();
 //							ReConnect contackTask=new ReConnect(socket,timer);
 //							timer.schedule(contackTask,1);//检测连接
@@ -178,6 +179,7 @@ public class Client extends JFrame implements Runnable  {
 								ip=textField_1.getText();
 								socket = new Socket(ip,8888);
 								socket.setKeepAlive(true);
+								socket.setSoTimeout(30000);
 								//Timer timer=new Timer();
 								//ReConnect contackTask=new ReConnect(socket,timer);
 								//timer.schedule(contackTask,1);//检测连接
