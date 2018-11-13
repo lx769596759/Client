@@ -10,9 +10,12 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import Client.Client;
+
 import org.apache.log4j.Logger;
 import org.jfree.data.time.Second;
 import org.jfree.data.time.TimeSeries;
+
+import tcpip.ReConnect;
 
 public class DataOperater implements Runnable {
 
@@ -47,10 +50,12 @@ public class DataOperater implements Runnable {
 				}
 			} catch (Exception e) {
 				logger.error("socket获取数据失败", e);
-				socket=null;
-				JOptionPane.showMessageDialog(Client.contentPane, "与工控机连接断开，请重新连接", "错误",JOptionPane.ERROR_MESSAGE );
-				Client.button.setEnabled(true);
-			    Client.chckbxNewCheckBox.setSelected(false);
+				socket = null;
+//				JOptionPane.showMessageDialog(Client.contentPane,
+//						"与工控机连接断开，请重新连接", "错误", JOptionPane.ERROR_MESSAGE);
+//				Client.button.setEnabled(true);
+//				Client.chckbxNewCheckBox.setSelected(false);
+				new ReConnect(); // 开启重连线程，每10S重连一次
 				break;
 			}
 

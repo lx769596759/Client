@@ -43,7 +43,7 @@ import org.jfree.data.time.Second;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
-import tcpip.ContactTask;
+import tcpip.ReConnect;
 import tcpip.SendData;
 import DataCollect.DataOperater;
 import dbUtility.dbTools;
@@ -54,7 +54,7 @@ import dbUtility.dbTools;
 public class Client extends JFrame implements Runnable  {
 	
 	    private static final long serialVersionUID = 1L;
-	    private static TimeSeries series;  
+	    public static TimeSeries series;  
 	    public static JPanel contentPane;
 	    private JTextField textField;
 	    public static JCheckBox chckbxNewCheckBox;
@@ -115,7 +115,7 @@ public class Client extends JFrame implements Runnable  {
 							socket = new Socket(ip,8888);
 							socket.setKeepAlive(true);
 //							Timer timer=new Timer();
-//							ContactTask contackTask=new ContactTask(socket,timer);
+//							ReConnect contackTask=new ReConnect(socket,timer);
 //							timer.schedule(contackTask,1);//检测连接
 			     		    //sd=new SendData(socket);
 			     		    chckbxNewCheckBox.setSelected(true);
@@ -178,9 +178,9 @@ public class Client extends JFrame implements Runnable  {
 								ip=textField_1.getText();
 								socket = new Socket(ip,8888);
 								socket.setKeepAlive(true);
-								Timer timer=new Timer();
-								ContactTask contackTask=new ContactTask(socket,timer);
-								timer.schedule(contackTask,1);//检测连接
+								//Timer timer=new Timer();
+								//ReConnect contackTask=new ReConnect(socket,timer);
+								//timer.schedule(contackTask,1);//检测连接
 				     		    //sd=new SendData(socket);
 				     		    chckbxNewCheckBox.setSelected(true);
 				     		    button.setEnabled(false);
