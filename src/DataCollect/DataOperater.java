@@ -4,26 +4,20 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.net.SocketException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import javax.swing.JOptionPane;
-
-import Client.Client;
-
+import javax.swing.JTextPane;
 import org.apache.log4j.Logger;
 import org.jfree.data.time.Second;
 import org.jfree.data.time.TimeSeries;
-
 import tcpip.ReConnect;
+import Client.Client;
 
 public class DataOperater implements Runnable {
 
-	TimeSeries series;
-	Socket socket;
+	private TimeSeries series;
+	private Socket socket;
 	public static Logger logger = Logger.getLogger(DataOperater.class);
-	public static boolean exit = false;
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	public DataOperater(TimeSeries series, Socket socket) {
@@ -52,10 +46,9 @@ public class DataOperater implements Runnable {
 			} catch (Exception e) {
 				logger.error("socket获取数据失败", e);
 				socket = null;
-//				JOptionPane.showMessageDialog(Client.contentPane,
-//						"与工控机连接断开，请重新连接", "错误", JOptionPane.ERROR_MESSAGE);
-//				Client.button.setEnabled(true);
 				Client.chckbxNewCheckBox.setSelected(false);
+				JTextPane infoPane = Client.jsdChart.getInfoPane();
+				infoPane.setText("已断开，正在重连......");
 				new ReConnect(); // 开启重连线程，每10S重连一次
 				break;
 			}

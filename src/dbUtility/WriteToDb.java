@@ -2,8 +2,10 @@ package dbUtility;
 
 import java.sql.Connection;
 import java.text.MessageFormat;
+
 import Client.Client;
 
+@Deprecated
 public class WriteToDb implements Runnable {
     
 	  String value;

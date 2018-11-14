@@ -3,9 +3,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+
 import Client.Client;
 
-
+@Deprecated
 public class SendData  implements Runnable{ 	  	  
 	Socket socket = null;
 	

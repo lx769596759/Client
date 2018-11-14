@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import javax.swing.JTextPane;
+
 import org.apache.log4j.Logger;
 
 import Client.Client;
@@ -36,6 +38,8 @@ public class ReConnect extends Thread {
 			t1.setPriority(10);
 			t1.start();
 			logger.info("重连成功，开始重新接收数据...");
+			JTextPane infoPane = Client.jsdChart.getInfoPane();
+		    infoPane.setText("");
 			Client.chckbxNewCheckBox.setSelected(true);
 			break;
 		}

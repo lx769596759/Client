@@ -14,12 +14,13 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Timer;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -29,9 +30,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.TitledBorder;
+
 import org.apache.log4j.Logger;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -43,7 +46,7 @@ import org.jfree.data.time.Second;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
-import tcpip.ReConnect;
+
 import tcpip.SendData;
 import DataCollect.DataOperater;
 import dbUtility.dbTools;
@@ -58,7 +61,7 @@ public class Client extends JFrame implements Runnable  {
 	    public static JPanel contentPane;
 	    private JTextField textField;
 	    public static JCheckBox chckbxNewCheckBox;
-	    private JButton initbutton;
+	    //private JButton initbutton;
 	    public static JButton btnNewButton_1;
 	    //private JButton btnNewButton_2;
 	    private Socket socket; 
@@ -66,13 +69,20 @@ public class Client extends JFrame implements Runnable  {
 	    private static SendData sd;
 	    public static String ip;
 	    public static Logger logger=Logger.getLogger(Client.class);
-	    private static Client jsdChart;
+	    public static Client jsdChart;
 	    private static InitDialog dialog;
 	    public static JButton button;
 	    //private JButton btnNewButton;
 	    public static JTextField tf_speed;  //显示皮带线速度
 	    public static JTextField tf_speed2; //显示出土量
-	    /** 
+	    
+	    private JTextPane infoPane;
+	    
+	    public JTextPane getInfoPane() {
+			return infoPane;
+		}
+
+		/** 
 	     * 构造 
 	     */  
 	    @SuppressWarnings("deprecation")
@@ -112,7 +122,8 @@ public class Client extends JFrame implements Runnable  {
 			     	public void actionPerformed(ActionEvent e) {
 			     		try {							
 							ip=textField_1.getText();
-							socket = new Socket(ip,8888);
+							socket = new Socket();
+							socket.connect(new InetSocketAddress(ip, 8888), 5000); //设置连接超时时间为5s
 							socket.setKeepAlive(true);
 							socket.setSoTimeout(30000);
 //							Timer timer=new Timer();
@@ -177,7 +188,8 @@ public class Client extends JFrame implements Runnable  {
 				     	public void actionPerformed(ActionEvent e) {
 				     		try {							
 								ip=textField_1.getText();
-								socket = new Socket(ip,8888);
+								socket = new Socket();
+								socket.connect(new InetSocketAddress(ip, 8888), 5000); //设置连接超时时间为5s
 								socket.setKeepAlive(true);
 								socket.setSoTimeout(30000);
 								//Timer timer=new Timer();
@@ -328,8 +340,11 @@ public class Client extends JFrame implements Runnable  {
 			     tf_speed2.setBounds(120, 54, 130, 21);
 			     tf_speed2.setEditable(false);
 			     dataPanel.add(tf_speed2);
-			
-			
+			     
+			     infoPane = new JTextPane();
+			     infoPane.setBounds(760, 550, 193, 21);
+			     infoPane.setFont(new Font("微软雅黑", Font.BOLD, 12));
+			     getContentPane().add(infoPane);
 	    }  
 	  
 	    /** 
